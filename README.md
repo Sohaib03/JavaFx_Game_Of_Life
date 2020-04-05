@@ -1,6 +1,6 @@
 # JavaFx_Game_Of_Life
 ----------------------
-## Description
+
 A Conway's Game of Life simulation made in Javafx.
 :star: Star this on GitHub — it helps to keep me motivated!
 
