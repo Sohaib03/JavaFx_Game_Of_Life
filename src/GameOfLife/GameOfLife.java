@@ -1,4 +1,4 @@
-package main;
+package GameOfLife;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -7,6 +7,7 @@ import javafx.scene.shape.StrokeType;
 
 import java.io.File;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GameOfLife {
@@ -43,7 +44,7 @@ public class GameOfLife {
 
     public void loadFromFile() {
         try{
-            Scanner input = new Scanner(new File("src/main/first_gen_state.txt"));
+            Scanner input = new Scanner(new File("src/GameOfLife/first_gen_state.txt"));
             int i=0;
             while (input.hasNextLine()){
                 String line = input.nextLine();
@@ -84,6 +85,11 @@ public class GameOfLife {
         }
     }
 
+    public void toggle(int i, int j) {
+        changed[i][j] = 1;
+        grid[i][j] = 1 - grid[i][j];
+    }
+
     public void updateGridPane () {
         for (int i=0; i<WIDTH; i++) {
             for (int j=0; j<HEIGHT; j++) {
@@ -115,14 +121,19 @@ public class GameOfLife {
     }
 
     public void setRectOn(Rectangle rect) {
-        rect.setFill(Color.web("#2A9DF4"));
-        rect.setStroke(Color.web("#03254c"));
+        rect.setFill(Color.web("#D0EFFF"));
+        rect.setStroke(Color.web("#187BCD"));
         rect.setStrokeType(StrokeType.INSIDE);
         rect.setStrokeWidth(0.5);
     }
     public void setRectOff(Rectangle rect) {
         rect.setFill(Color.WHITE);
         rect.setStroke(Color.WHITE);
+    }
 
+    public void reset() {
+        for (int i=0; i<WIDTH; i++)
+            for (int j=0; j<HEIGHT; j++) if (grid[i][j]==1) toggle(i, j);
+        updateGridPane();
     }
 }
